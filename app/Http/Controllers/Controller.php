@@ -15,10 +15,11 @@ class Controller extends BaseController
     {
         $categories = [];
         $faker = Factory::create();
-        if($id) {
-            $news = [];
+        if(isset($id)) {
+            $newsList = [];
             for($i=0; $i<10; $i++){
-                $news[$i] = [
+                $newsList[$i] = [
+                    'id' => $faker->randomDigitNotNull(),
                     'category_id' => $id,
                     'title' => $faker->jobTitle(),
                     'author' => $faker->userName(),
@@ -31,7 +32,7 @@ class Controller extends BaseController
                 'id' => $id,
                 'name' => $faker->jobTitle(),
                 'created_at' => now('Europe/Moscow'),
-                'news' => $news
+                'newsList' => $newsList
             ];
         }
         for($i=0; $i<10; $i++){
@@ -46,10 +47,11 @@ class Controller extends BaseController
 
     public function getNews(int $id = null):array
     {
-        $news = [];
+        $newsList = [];
         $faker = Factory::create();
-        if($id) {
+        if(isset($id)) {
             return [
+                'id' => $faker->randomDigitNotNull(),
                 'category_id' => $faker->randomDigitNotNull(),
                 'title' => $faker->jobTitle(),
                 'author' => $faker->userName(),
@@ -59,7 +61,8 @@ class Controller extends BaseController
             ];
         }
         for($i=0; $i<10; $i++){
-            $news[$i] = [
+            $newsList[$i] = [
+                'id' => $faker->randomDigitNotNull(),
                 'category_id' => $faker->randomDigitNotNull(),
                 'title' => $faker->jobTitle(),
                 'author' => $faker->userName(),
@@ -68,6 +71,6 @@ class Controller extends BaseController
                 'created_at' => now('Europe/Moscow')
             ];
         }
-        return $news;
+        return $newsList;
     }
 }

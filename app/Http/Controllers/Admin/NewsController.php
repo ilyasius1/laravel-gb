@@ -12,8 +12,10 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
-        return 'admin index';
+        $news = $this->getNews();
+        return view('admin.news.index', [
+            'newsList' => $news
+        ]);
     }
 
     /**
@@ -37,8 +39,10 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
-        return "admin show $id";
+        $news = $this->getNews($id);
+        return view('admin.news.show', [
+            'news' => $news
+        ]);
     }
 
     /**
