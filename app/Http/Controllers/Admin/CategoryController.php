@@ -12,7 +12,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = $this->getCategories();
+        return view('admin.categories.index', [
+            'categoriesList' => $categories
+        ]);
     }
 
     /**
@@ -36,7 +39,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = $this->getCategories($id);
+        return view('admin.categories.show', ['category' => $category]);
     }
 
     /**
