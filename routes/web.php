@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', function (array $messages = []) {
+    return view('index', ['messages' => $messages]);
 })
     ->name('index');
 
@@ -36,6 +38,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
         ->name('index');
     Route::resource('categories', AdminCategoryController::class);
     Route::resource('news', AdminNewsController::class);
+    Route::resource('orders', AdminOrderController::class);
 });
 
 Route::get('/category', [CategoryController::class, 'index'])
@@ -49,4 +52,6 @@ Route::get('/news', [NewsController::class, 'index'])
 
 Route::get('/news/{id}', [NewsController::class, 'show'])
     ->where('id', '\d+')
-    ->name('news.show');;
+    ->name('news.show');
+
+Route::resource('orders', OrderController::class);

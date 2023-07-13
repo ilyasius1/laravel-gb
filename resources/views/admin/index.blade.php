@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Админка</h1>
     </div>
-<h2>Адимнка - главная страница</h2>
+<h2>Админка - главная страница</h2>
     @if(!empty($showAlert))
     <x-alert :type="request()->get('type', 'success')" message="Some message"></x-alert>
     <x-alert type="success" message="success"></x-alert>
