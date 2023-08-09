@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Models\News;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -9,13 +15,13 @@ class NewsController extends Controller
     /**
      * List all news
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
-    public function index()
+    public function index(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $news = $this->getNews();
+        $model = app(News::class);
         return view('news.index', [
-            'newsList' => $news
+            'newsList' => $model->getNews()
         ]);
     }
 
@@ -23,13 +29,13 @@ class NewsController extends Controller
     /**
      * Returns current news
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
-    public function show(int $id)
+    public function show(int $id): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $newsItem = $this->getNews($id);
+        $model = app(News::class);
         return view('news.show', [
-            'newsItem' => $newsItem
+            'newsItem' => $model->getNewsById($id)
         ]);
     }
 }

@@ -25,6 +25,8 @@ class CategorySeeder extends Seeder
             $data[] = [
                 'title' => 'Category #' . $i,
                 'description' => fake('ru_RU')->text(100),
+                'created_at' => now(),
+                'updated_at' => now(),
             ];
         }
         return $data;

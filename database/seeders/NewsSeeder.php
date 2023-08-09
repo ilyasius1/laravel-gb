@@ -31,6 +31,8 @@ class NewsSeeder extends Seeder
                 'image' => fake()->imageUrl(),
                 'status' => NewsStatus::ACTIVE->value,
                 'description' => $faker->realText(rand(100,200)),
+                'created_at' => now(),
+                'updated_at' => now(),
             ];
         }
         return $data;
