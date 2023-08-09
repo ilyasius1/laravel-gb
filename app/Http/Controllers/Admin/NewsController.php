@@ -1,8 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -10,11 +16,12 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
-        $news = $this->getNews();
+        $model = app(News::class);
+       // dd( $model->getNews(true));
         return view('admin.news.index', [
-            'newsList' => $news
+            'newsList' => $model->getNews(true)
         ]);
     }
 
@@ -43,9 +50,10 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        $news = $this->getNews($id);
+        $model = app(News::class);
+        dd($model->getNews($id));
         return view('admin.news.show', [
-            'news' => $news
+            'news' => $model->getNews($id)
         ]);
     }
 
