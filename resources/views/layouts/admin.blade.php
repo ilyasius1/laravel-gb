@@ -199,9 +199,8 @@
         </main>
     </div>
 </div>
+@vite('resources/js/app.js')
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js">
-
 </script><script src="{{ asset('assets/js/dashboard.js') }}"></script></body>
 </html>

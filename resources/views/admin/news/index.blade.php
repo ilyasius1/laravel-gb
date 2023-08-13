@@ -28,24 +28,33 @@
                     <th scope="col">Автор</th>
                     <th scope="col">Статус</th>
                     <th scope="col">Дата создания</th>
+                    <th scope="col">Действия </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($newsList as $key => $newsItem)
                     <tr>
-                        <td><a href="{{ route('admin.news.show',['news' => $newsItem->id]) }}">{{ $newsItem->id }}</a>
+                        <td><a href="{{ route('admin.news.show',['news' => $newsItem]) }}">{{ $newsItem->id }}</a>
                         </td>
-                        <td><a href="{{ route('admin.categories.show',['category' => $newsItem->categoryId]) }}">{{ $newsItem->categoryTitle }}</a></td>
                         <td>
-                            <a href="{{ route('admin.news.show',['news' => $newsItem->title]) }}">{{ $newsItem->title }}</a>
+                            @foreach($newsItem->categories as $category)
+                            <a href="{{ route('admin.categories.show',['category' => $category]) }}">{{ $category->title }}</a>
+                            @endforeach
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.news.show',['news' => $newsItem]) }}">{{ $newsItem->title }}</a>
                         </td>
                         <td>{{ $newsItem->author }}</a></td>
                         <td>{{ $newsItem->status }}</a></td>
-                        <td>{{ (new Carbon($newsItem->created_at))->format('d.m.Y H:i') }}</td>
-                        <td><a href="#">Edit</a>&nbsp; <a href="#" style="color:red">Delete</a></td>
+                        <td>{{ Date::createFromTimeString($newsItem->created_at)->format('d.m.Y H:i') }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('admin.news.edit', ['news' => $newsItem]) }}">Edit</a>&nbsp;
+                            <button class="btn btn-danger" name="delete" data-id="{{ $newsItem->id }}" data-resource="news">@csrf @method('delete')Delete</button>
+                        </td>
                     </tr>
                 @endforeach
             </table>
+            {{ $newsList->links() }}
         </div>
     @endif
 @endsection

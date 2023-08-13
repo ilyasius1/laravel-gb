@@ -18,18 +18,30 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">Название</th>
+                    <th scope="col">Описание</th>
                     <th scope="col">Количество статей</th>
+                    <th scope="col">Дата создания</th>
+                    <th scope="col">Действия </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($categoriesList as $key => $category)
                     <tr>
-                        <td><a href="{{ route('admin.categories.show',['category' => $category['id']]) }}">{{ $category['id'] }}</td>
-                        <td><a href="{{ route('admin.categories.show',['category' => $category['id']]) }}">{{ $category['name'] }}</td>
+                        <td><a href="{{ route('admin.categories.show',['category' => $category]) }}">{{ $category->id }}</td>
+                        <td><a href="{{ route('admin.categories.show',['category' => $category]) }}">{{ $category->title }}</td>
+                        <td>{{ $category->description }}</a></td>
                         <td>{{ rand(1, 20) }}</td>
+                        <td>{{ Date::createFromTimeString($category->created_at)->format('d.m.Y H:i') }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('admin.categories.edit', ['category' => $category]) }}">Edit</a>&nbsp;
+                            <button class="btn btn-danger" name="delete" data-id="{{ $category->id }}" data-resource="categories">@csrf @method('delete')Delete</button>
+                        </td>
                     </tr>
                 @endforeach
             </table>
+{{--            {{ $categoriesList->lastItem() }}--}}
+{{--            {{ $categoriesList->count() }}--}}
+{{--            {{ $categoriesList->links() }}--}}
         </div>
     @endif
 @endsection
