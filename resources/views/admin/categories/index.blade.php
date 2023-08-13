@@ -30,18 +30,16 @@
                         <td><a href="{{ route('admin.categories.show',['category' => $category]) }}">{{ $category->id }}</td>
                         <td><a href="{{ route('admin.categories.show',['category' => $category]) }}">{{ $category->title }}</td>
                         <td>{{ $category->description }}</a></td>
-                        <td>{{ rand(1, 20) }}</td>
+                        <td>{{ $category->news()->count() }}</td>
                         <td>{{ Date::createFromTimeString($category->created_at)->format('d.m.Y H:i') }}</td>
                         <td>
                             <a class="btn btn-success" href="{{ route('admin.categories.edit', ['category' => $category]) }}">Edit</a>&nbsp;
-                            <button class="btn btn-danger" name="delete" data-id="{{ $category->id }}" data-resource="categories">@csrf @method('delete')Delete</button>
+                            <button class="btn btn-danger" name="delete" data-id="{{ $category->id }}" data-resource="categories">Delete</button>
                         </td>
                     </tr>
                 @endforeach
             </table>
-{{--            {{ $categoriesList->lastItem() }}--}}
-{{--            {{ $categoriesList->count() }}--}}
-{{--            {{ $categoriesList->links() }}--}}
+            {{ $categoriesList->links() }}
         </div>
     @endif
 @endsection

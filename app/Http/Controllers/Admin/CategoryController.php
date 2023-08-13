@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         $category->fill($request->only('title','description'));
         if($category->save()){
-            return back()->with('success','News has been created');
+            return \redirect()->route('admin.categories.index')->with('success', __('Category has been updated'));
         }
         return back()->with('error','Error! Category has not been updated');
     }
@@ -86,12 +86,15 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, Category $category): Response
     {
-        if($category->delete()){
-            return response('resource deleted successfully', 204)->json([
-                'message' => '',
-                'lastPage' => route('admin.categories .index') . '/?page=' . $this->newsQueryBuilder->getAll()->lastPage()
-            ]);
+        try {
+            $category->delete();
+                return response('Resource has been deleted', 204)->json([
+                    'message' => '',
+                    'lastPage' => route('admin.categories.index') . '/?page=' . $this->newsQueryBuilder->getAll()->lastPage()
+                ]);
+        } catch(\Throwable $exception) {
+            \Log::error($exception->getMessage(), $exception->getTrace());
+            return \back()->with('Error! News has not been deleted');
         }
-        return \back()->with('Error! News has not been deleted');
     }
 }

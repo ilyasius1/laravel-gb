@@ -1,0 +1,21 @@
+{
+    "News has been updated": "Новость была успешно обновлена",
+    "News has not been updated": "Не удалось обновить новость",
+    "News has been created": "Новость была добавлена",
+    "News has not been created": "Не удалось добавить новость",
+    "Resource has been deleted": "Запись была удалена",
+    "Resource has not been deleted": "Не удалось удалить запись",
+    "Category has been updated": "Новость была успешно обновлена",
+    "Category has not been updated": "Не удалось обновить новость",
+    "Category has been created": "Запись была добавлена",
+    "Category has not been created": "Не удалось добавить запись",
+    "Register": "Регистрация",
+    "Name": "Имя",
+    "Email Address": "Email адрес",
+    "Password": "Пароль",
+    "Confirm Password": "Повторите пароль",
+    "Login": "Вход",
+    "Remember Me": "Запомнить меня",
+    "Forgot Your Password?": "Забыли пароль?",
+    "Account": "Панель управления"
+}
