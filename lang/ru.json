@@ -9,6 +9,10 @@
     "Category has not been updated": "Не удалось обновить новость",
     "Category has been created": "Запись была добавлена",
     "Category has not been created": "Не удалось добавить запись",
+    "Profile has been updated": "Профиль пользователя был успешно обновлен",
+    "Profile has not been updated": "Не удалось обновить профиль пользователя",
+    "Profile has been created": "Профиль пользователя был упешно удален",
+    "Profile has not been created": "Не удалось добавить  профиль пользователя",
     "Register": "Регистрация",
     "Name": "Имя",
     "Email Address": "Email адрес",
@@ -17,5 +21,9 @@
     "Login": "Вход",
     "Remember Me": "Запомнить меня",
     "Forgot Your Password?": "Забыли пароль?",
-    "Account": "Панель управления"
+    "Account": "Панель управления",
+    "Users profiles": "Профили пользователей",
+    "enter_password" : "Введите пароль",
+    "confirm_password" : "Введите подтверждение пароля",
+    "password_confirmation": "Подтверждение пароля"
 }

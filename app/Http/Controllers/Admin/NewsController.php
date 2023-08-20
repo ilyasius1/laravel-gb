@@ -61,9 +61,9 @@ class NewsController extends Controller
             $news->categories()->attach($request->getCategories());
             return redirect()->route('admin.news.index',[
                 'page' =>  $this->newsQueryBuilder->getAll()->lastPage()
-            ],201)->with('success','News has been created');
+            ],201)->with('success', __('News has been created'));
         }
-        return \back()->with('error',  __('News has not been created'));
+        return \back()->with('error', __('News has not been created'));
     }
 
     /**
@@ -97,7 +97,7 @@ class NewsController extends Controller
             $news->categories()->sync($request->getCategories());
             return \redirect()->route('admin.news.index')->with('success', __('News has been updated'));
         }
-        return \back()->with('error', __('Error! News has not been updated'));
+        return \back()->with('error', __('News has not been updated'));
     }
 
     /**
@@ -108,7 +108,7 @@ class NewsController extends Controller
         try {
             $news->delete();
             return \response()->json([
-                'message'=> 'success','Resource has been deleted',
+                'message'=> 'success', __('Resource has been deleted'),
                 'lastPage' => route('admin.news.index') . '/?page=' . $this->newsQueryBuilder->getAll()->lastPage()
             ], 200);
         } catch (\Throwable $exception) {

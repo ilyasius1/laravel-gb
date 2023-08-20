@@ -139,5 +139,7 @@ return [
         'author' => 'Автор',
         'categories' => 'Категории',
         'description' => 'Описание',
+        'password' => 'Пароль',
+        'password_confirmation' => 'Подтверждение пароля'
     ],
 ];

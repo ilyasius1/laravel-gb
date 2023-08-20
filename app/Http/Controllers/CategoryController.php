@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index(CategoriesQueryBuilder $categoriesQueryBuilder): View
     {
         return view('category.index', [
-            'categoriesList' => $categoriesQueryBuilder->getAll()
+            'categories' => $categoriesQueryBuilder->getAll()
         ]);
     }
 
