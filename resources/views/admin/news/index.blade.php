@@ -15,6 +15,7 @@
         </div>
     </div>
     <h2>Список новостей</h2>
+    @include('admin.message')
     @if(empty($newsList))
         <div>Новостей нет</div>
     @else
@@ -49,7 +50,7 @@
                         <td>{{ Date::createFromTimeString($newsItem->created_at)->format('d.m.Y H:i') }}</td>
                         <td>
                             <a class="btn btn-success" href="{{ route('admin.news.edit', ['news' => $newsItem]) }}">Edit</a>&nbsp;
-                            <button class="btn btn-danger" name="delete" data-id="{{ $newsItem->id }}" data-resource="news">@csrf @method('delete')Delete</button>
+                            <button class="btn btn-danger" name="delete" data-id="{{ $newsItem->id }}" data-resource="news">Delete</button>
                         </td>
                     </tr>
                 @endforeach

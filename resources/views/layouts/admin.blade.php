@@ -7,6 +7,7 @@
     <title>@section('title') :: NewsPortal @show</title>
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <meta name="theme-color" content="#712cf9">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;

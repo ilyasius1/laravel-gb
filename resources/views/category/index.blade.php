@@ -20,7 +20,7 @@
                         <p class="card-text">{{ $category->name }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{{ route('category.show', ['id' => $category['id']]) }}" type="button" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                                <a href="{{ route('category.show', ['category' => $category]) }}" type="button" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                             </div>
                         </div>
                     </div>

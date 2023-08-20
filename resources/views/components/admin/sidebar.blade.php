@@ -30,6 +30,12 @@
                         Заказы
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->routeIs('admin.profiles.*'))active @endif" href="{{ route('admin.profiles.index') }}">
+                        <svg class="bi"><use xlink:href="#people"/></svg>
+                        {{ __('Users profiles') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
