@@ -7,6 +7,14 @@ namespace App\Providers;
 use App\Queries\CategoriesQueryBuilder;
 use App\Queries\NewsQueryBuilder;
 use App\Queries\QueryBuilder;
+use App\Queries\UsersQueryBuilder;
+use App\Repositories\CurrencyCacheRepository;
+use App\Repositories\CurrencyRepositoryInterface;
+use App\Services\Contracts\Parser;
+use App\Services\Contracts\Social;
+use App\Services\CurrencyRatesParserService;
+use App\Services\NewsParserService;
+use App\Services\SocialService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,8 +25,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        //Query builders
         $this->app->bind(QueryBuilder::class, CategoriesQueryBuilder::class);
         $this->app->bind(QueryBuilder::class, NewsQueryBuilder::class);
+        $this->app->bind(QueryBuilder::class, UsersQueryBuilder::class);
+
+        //Services
+        $this->app->bind(Parser::class, NewsParserService::class);
+        $this->app->bind(Parser::class, CurrencyRatesParserService::class);
+        $this->app->bind(Social::class, SocialService::class);
+
+        //Repositories
+        $this->app->bind(CurrencyRepositoryInterface::class, CurrencyCacheRepository::class);
     }
 
     /**

@@ -20,7 +20,7 @@ class isAdminCheck
     {
         $user = Auth::user();
         if(!$user || $user->is_admin !== true) {
-            abort(404);
+            abort(403);
         }
         return $next($request);
     }

@@ -53,6 +53,7 @@
         </div>
         <br>
         <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="{{ back() }}" class="btn btn-cancel">{{ __('Back') }}</a>
     </form>
     </div>
 @endsection
