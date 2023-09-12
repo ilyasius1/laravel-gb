@@ -20,7 +20,8 @@ class News extends Model
         'title',
         'author',
         'status',
-        'description'
+        'description',
+        'origin_link'
     ];
 
     /* Relations*/

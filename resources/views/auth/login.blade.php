@@ -7,6 +7,11 @@
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
+                <br>
+                <a href="{{ route('social-providers.redirect', ['driver' => 'vkontakte']) }}">Login via VK</a>
+                <a href="{{ route('social-providers.redirect', ['driver' => 'github']) }}">Login via GitHub</a>
+                <a href="{{ route('social-providers.redirect', ['driver' => 'steam']) }}">Login via Steam</a>
+                <a href="{{ route('social-providers.redirect', ['driver' => 'yandex']) }}">Login via Yandex</a>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

@@ -18,6 +18,9 @@
                         <br>
                             <p><a href="{{ route('index') }}" style="color: red">На главную</a></p>
                         <br>
+                            @if(Auth::user()->avatar)
+                                <img src="{{ Auth::user()->avatar }}" style="width: 150px;">
+                            @endif
                             @if(Auth::user()->is_admin)
                         <p><a href="{{ route('admin.index') }}" style="color: red">В админку</a></p>
                             @endif

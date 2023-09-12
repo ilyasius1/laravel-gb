@@ -9,31 +9,43 @@
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('admin.index'))active @endif" aria-current="page" href="{{ route('admin.index') }}">
                         <svg class="bi"><use xlink:href="#house-fill"/></svg>
-                        Главная
+                        {{ __('Main page') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('admin.categories.*'))active @endif" href="{{ route('admin.categories.index') }}">
                         <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-                        Категории
+                        {{ __('Categories') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('admin.news.*'))active @endif" href="{{ route('admin.news.index') }}">
                         <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
-                        Новости
+                        {{ __('News') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('admin.orders.*'))active @endif" href="{{ route('admin.orders.index') }}">
                         <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
-                        Заказы
+                        {{ __('Orders') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('admin.profiles.*'))active @endif" href="{{ route('admin.profiles.index') }}">
                         <svg class="bi"><use xlink:href="#people"/></svg>
                         {{ __('Users profiles') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->routeIs('admin.news-sources.*'))active @endif" href="{{ route('admin.news-sources.index') }}">
+                        <svg class="bi"><use xlink:href="#people"/></svg>
+                        {{ __('News Sources') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->routeIs('admin.parser.*'))active @endif" href="{{ route('admin.parser.index') }}">
+                        <svg class="bi"><use xlink:href="#people"/></svg>
+                        {{ __('Parser') }}
                     </a>
                 </li>
             </ul>
