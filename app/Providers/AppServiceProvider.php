@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Jobs\NewsParsingJob;
 use App\Queries\CategoriesQueryBuilder;
 use App\Queries\NewsQueryBuilder;
 use App\Queries\QueryBuilder;
@@ -12,9 +13,12 @@ use App\Repositories\CurrencyCacheRepository;
 use App\Repositories\CurrencyRepositoryInterface;
 use App\Services\Contracts\Parser;
 use App\Services\Contracts\Social;
+use App\Services\Contracts\Upload;
 use App\Services\CurrencyRatesParserService;
 use App\Services\NewsParserService;
 use App\Services\SocialService;
+use App\Services\UploadService;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,9 +38,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(Parser::class, NewsParserService::class);
         $this->app->bind(Parser::class, CurrencyRatesParserService::class);
         $this->app->bind(Social::class, SocialService::class);
+        $this->app->bind(Upload::class, UploadService::class);
 
         //Repositories
         $this->app->bind(CurrencyRepositoryInterface::class, CurrencyCacheRepository::class);
+
     }
 
     /**

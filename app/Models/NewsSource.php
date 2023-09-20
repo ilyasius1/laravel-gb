@@ -23,6 +23,7 @@ class NewsSource extends Model
         'image_field',
         'description_field',
         'origin_link_field',
+        'pub_date_field',
         'isActive',
     ];
 
@@ -30,16 +31,39 @@ class NewsSource extends Model
     {
         return Attribute::make(
             get: function (mixed $value, array $attributes) {
-                $fields = array_filter([
-                    $attributes['title_field'],
-                    $attributes['author_field'],
-                    $attributes['image_field'],
-                    $attributes['description_field'],
-                    $attributes['origin_link_field']
-                ], fn ($item) => strlen($item));
+//                $fields = array_filter([
+//                    $attributes['title_field'],
+//                    $attributes['author_field'],
+//                    $attributes['image_field'],
+//                    $attributes['description_field'],
+//                    $attributes['origin_link_field'],
+//                    $attributes['pub_date_field']
+//                ], fn ($item) => strlen($item));
+//                $fields =
+//                    [
+//                    $attributes['title_field'],
+//                    $attributes['author_field'],
+//                    $attributes['image_field'],
+//                    $attributes['description_field'],
+//                    $attributes['origin_link_field'],
+//                    $attributes['pub_date_field']
+//                ];
+                $str = '';
+//                foreach ($attributes as $key => $field) {
+//                    if(strlen($field) && str_ends_with($key, '_field')) {
+//                        $str .= substr($key, 0,-6) . '>' . $field;
+//                    }
+//                };
+                $fields = array_filter($attributes, function($value, $key) {
+                    return strlen($value) && str_ends_with($key, '_field') && $key !== 'item_field';
+                    }, ARRAY_FILTER_USE_BOTH);
+
+                $transformedFields = array_map(function( $key,  $value) {
+                        return $value . '>' . substr($key, 0,-6);
+                }, array_keys($fields), array_values($fields));
                 return $attributes['item_field']
                 . '['
-                . implode(',', $fields)
+                . implode(',', $transformedFields)
                 . ']';
         });
     }

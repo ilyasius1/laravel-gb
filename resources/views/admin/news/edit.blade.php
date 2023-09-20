@@ -33,6 +33,7 @@
             <label for="image">Изображение</label>
             <br>
             @error('image') <strong class="text-danger">{{ $message }}</strong> @enderror
+            <img src="{{ Storage::disk('public')->url($news->image) }}">
             <input type="file" name="image" id="image" class="form-control" value="{{ old('image') ?? $news->image }}"/>
         </div>
         <div class="form-group">
@@ -50,6 +51,7 @@
             <br>
             @error('description') <strong class="text-danger">{{ $message }}</strong> @enderror
             <textarea class="form-control" name="description" id="description">{!! old('description') ?? $news->description !!}</textarea>
+{{--            <div id="description"></div>--}}
         </div>
         <br>
         <button type="submit" class="btn btn-success">Сохранить</button>
@@ -57,3 +59,12 @@
     </form>
     </div>
 @endsection
+@push('js')
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+@endpush

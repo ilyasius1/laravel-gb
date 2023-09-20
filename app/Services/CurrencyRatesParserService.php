@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Services\Contracts\Parser;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use http\Env;
 use Illuminate\Support\Facades\Cache;
 use Orchestra\Parser\Xml\Facade;
 
-class CurrencyRatesParserService implements Contracts\Parser
+class CurrencyRatesParserService implements Parser
 {
     private string $link;
     private string $format;
@@ -61,9 +62,10 @@ class CurrencyRatesParserService implements Contracts\Parser
      * @param string $link
      * @return $this
      */
-    public function setLink(string $link): void
+    public function setLink(string $link): Parser
     {
         $this->link = $link;
+        return $this;
     }
 
     /**
@@ -78,5 +80,8 @@ class CurrencyRatesParserService implements Contracts\Parser
             $this->parseJSON();
         }
     }
-
+    public function getSource(): string
+    {
+        return $this->link;
+    }
 }
