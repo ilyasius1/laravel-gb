@@ -25,9 +25,9 @@
             <label for="categories">{{ __('News Source') }}</label>
             <br>
             @error('newsSources') <strong class="text-danger">{{ $message }}</strong> @enderror
-            <select class="form-control" name="source" id="source">
+            <select class="form-control" multiple name="sources[]" id="sources">
                 @foreach($newsSources as $source)
-                    <option @selected($source->id === old('source') ) value="{{ $source->id }}">{{ $source->title }}</option>
+                    <option @selected(old('source') === $source->id) value="{{ $source->id }}">{{ $source->title }}</option>
                 @endforeach
             </select>
         </div>

@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index(CategoriesQueryBuilder $categoriesQueryBuilder)
     {
         return view('admin.categories.index', [
-            'categoriesList' => $categoriesQueryBuilder->getAll()
+            'categoriesList' => $categoriesQueryBuilder->getPaginate()
         ]);
     }
 

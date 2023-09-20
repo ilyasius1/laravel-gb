@@ -30,8 +30,13 @@ class NewsQueryBuilder extends QueryBuilder
         return $this->getModel()->blocked()->get();
     }
 
-    public function getAll(): LengthAwarePaginator
+    public function getAll(): Collection
     {
-        return $this->getModel()->with('categories')->paginate(5);
+        return $this->getModel()->with('categories')->get();
+    }
+
+    public function getPaginate(): LengthAwarePaginator
+    {
+        return $this->getModel()->with('categories')->paginate(10);
     }
 }

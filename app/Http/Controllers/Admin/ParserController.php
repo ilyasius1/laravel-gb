@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ParserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Parser\ParserRequest;
+use App\Jobs\NewsParsingJob;
 use App\Models\NewsSource;
 use App\Queries\NewsSourcesQueryBuilder;
 use App\Queries\QueryBuilder;
@@ -53,21 +54,26 @@ class ParserController extends Controller
      */
     public function run(ParserRequest $request): \Illuminate\Contracts\Foundation\Application|Application|RedirectResponse|Redirector
      {
-         $data = $request->all();
+         $data = $request->validated();
+//         dd($data);
          if($data['type'] === ParserType::NEWS->value) {
-             $source = $this->newsSourcesQueryBuilder->find($request->get('source'));
-             $parser = new NewsParserService($source);
+             $sources = $this->newsSourcesQueryBuilder->findMany($data['sources']);
+             foreach ($sources as $source) {
+                 dispatch(new NewsParsingJob($source->link));
+//                 NewsParsingJob::dispatch($source);
+             }
+             die();
          }
          else {
              $parser = new CurrencyRatesParserService();
+             try {
+                 $parser->saveParseData();
+             } catch (\Throwable $exception) {
+                 \Log::error($exception->getMessage(), $exception->getTrace());
+                 die();
+                 return redirect(route('admin.parser.index'))->with('error', __('Failed to load or parse data'));
+             }
          }
-         try {
-             $parser->saveParseData();
-         } catch (\Throwable $exception) {
-             \Log::error($exception->getMessage(), $exception->getTrace());
-             die();
-             return redirect(route('admin.parser.index'))->with('error', __('Failed to load or parse news'));
-         }
-         return redirect(route('admin.parser.index'))->with("updated");
+         return redirect(route('admin.parser.index'))->with('success', __('Job(s) added to queue'));
      }
 }

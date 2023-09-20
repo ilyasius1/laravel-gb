@@ -51,6 +51,8 @@
                 <label for="origin_link_field">origin_link_field</label>
                 @error('origin_link_field') <strong class="text-danger">{{ $message }}</strong> @enderror
                 <input type="text" name="origin_link_field" id="origin_link_field" class="form-control" value="{{ old('origin_link_field') ?? $newsSource->origin_link_field }}"/>
+                <label for="pub_date_field">pub_date_field</label>
+                <input type="text" name="pub_date_field" id="pub_date_field" class="form-control" value="{{ old('pub_date_field') ?? $newsSource->pub_date_field }}"/>
                 <br>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="is_active" name="is_active" {{ old('is_active') ?? $newsSource->is_active ? 'checked' : '' }}>

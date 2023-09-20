@@ -11,6 +11,7 @@ use App\Models\News;
 use App\Queries\CategoriesQueryBuilder;
 use App\Queries\NewsQueryBuilder;
 use App\Queries\QueryBuilder;
+use App\Services\Contracts\Upload;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -37,7 +38,7 @@ class NewsController extends Controller
     public function index(): Application|Factory|View
     {
         return view('admin.news.index', [
-            'newsList' => $this->newsQueryBuilder->getAll()
+            'newsList' => $this->newsQueryBuilder->getPaginate()
         ]);
     }
 
@@ -54,9 +55,12 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Store $request): RedirectResponse
+    public function store(Store $request, Upload $upload): RedirectResponse
     {
         $news = News::create($request->validated());
+        if($request->hasFile('image')) {
+            $news['image'] = $upload->create($request->file('image'));
+        }
         if($news) {
             $news->categories()->attach($request->getCategories());
             return redirect()->route('admin.news.index',[
@@ -90,9 +94,12 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Update $request, News $news): RedirectResponse
+    public function update(Update $request, News $news, Upload $upload): RedirectResponse
     {
         $news = $news->fill($request->validated());
+        if($request->hasFile('image')) {
+            $news['image'] = $upload->create($request->file('image'));
+        }
         if($news->save()){
             $news->categories()->sync($request->getCategories());
             return \redirect()->route('admin.news.index')->with('success', __('News has been updated'));

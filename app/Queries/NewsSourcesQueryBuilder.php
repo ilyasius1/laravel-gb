@@ -30,4 +30,9 @@ class NewsSourcesQueryBuilder extends QueryBuilder
     {
         return $this->getModel()->find($id);
     }
+
+    public function findMany(array $ids)
+    {
+        return $this->getModel()->findMany($ids);
+    }
 }

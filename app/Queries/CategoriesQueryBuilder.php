@@ -18,7 +18,12 @@ class CategoriesQueryBuilder extends QueryBuilder
         return Category::query();
     }
 
-    public function getAll(): LengthAwarePaginator
+    public function getAll(): Collection
+    {
+        return $this->getModel()->get();
+    }
+
+    public function getPaginate(): LengthAwarePaginator
     {
         return $this->getModel()->paginate(10);
     }

@@ -32,7 +32,8 @@ class Store extends FormRequest
             'author_field' => ['nullable', 'string', 'min:2', 'max:200'],
             'image_field' => ['sometimes','max:50'],
             'description_field' => ['required', 'string', 'min:2', 'max:200'],
-            'origin_link_field' => ['nullable', 'string', 'min:7', 'max: 200'],
+            'origin_link_field' => ['nullable', 'string', 'min:3', 'max: 200'],
+            'pub_date_field' => ['nullable', 'string', 'min:2', 'max: 200'],
         ];
     }
 

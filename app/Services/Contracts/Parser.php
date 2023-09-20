@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace App\Services\Contracts;
 
-use App\Models\ExternalSource;
-
 interface Parser
 {
     /**
      * @param string $link
-     * @return void
+     * @return Parser
      */
-    public function setLink(string $link): void;
+    public function setLink(string $link): Parser;
 
     /**
      * @return void
      */
     public function saveParseData(): void;
+    public function getSource(): string;
 
 }

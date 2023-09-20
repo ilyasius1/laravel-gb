@@ -10,7 +10,7 @@ use App\Services\Contracts\Parser;
 
 use Orchestra\Parser\Xml\Facade;
 
-class NewsParserService implements Contracts\Parser
+class NewsParserService implements Parser
 {
 
     private NewsSource $source;
@@ -23,11 +23,12 @@ class NewsParserService implements Contracts\Parser
 
     /**
      * @param string $link
-     * @return void
+     * @return Parser
      */
-    public function setLink(string $link): void
+    public function setLink(string $link): Parser
     {
         $this->link = $link;
+        return $this;
     }
 
     /**
@@ -36,11 +37,6 @@ class NewsParserService implements Contracts\Parser
     public function saveParseData(): void
     {
         $xml = Facade::load($this->source->link);
-        $item_field = 'channel.item';
-//        dump($this->source->title_field);
-//
-//        dump($this->source->xml_fields);
-//        dump($this->source);
         $data = $xml->parse([
             'title' => [
                 'uses' => 'channel.title',
@@ -55,18 +51,18 @@ class NewsParserService implements Contracts\Parser
                 'uses' =>'channel.image.url'
             ],
             'news' => [
-                'uses' =>  $this->source->xml_fields,
+                'uses' =>  $this->source->xml_fields,   //"channel.item[title>title,author>author,link>origin_link,description>description,pubDate>pub_date]"
             ],
         ]);
-//        $news = $xml->parse(['news' => [
-//        'uses' =>  $this->source->xml_fields]]);
-
         foreach ($data['news'] as $newsItem) {
             $news = News::create($newsItem);
             if ($news) {
                 $news->categories()->attach($this->source['category_id']);
-                dump($news);
             }
         }
+    }
+    public function getSource(): string
+    {
+        return $this->source->xmlFields;
     }
 }

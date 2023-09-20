@@ -25,7 +25,8 @@ class ParserRequest extends FormRequest
     {
         return [
             'type' => ['required', new Enum(ParserType::class)],
-            'source' => ['sometimes', 'nullable','string','exists:news_sources,id']
+            'sources' => ['sometimes', 'nullable','array','exists:news_sources,id'],
+            'sources.*' => ['exists:news_sources,id']
         ];
     }
 }
